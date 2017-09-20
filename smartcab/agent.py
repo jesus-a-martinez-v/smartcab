@@ -93,6 +93,10 @@ class LearningAgent(Agent):
         # If it is not, create a new dictionary for that state
         #   Then, for each action available, set the initial Q-value to 0.0
 
+        if state not in self.Q:
+            for action in self.valid_actions:
+                self.Q[state] =
+
         return
 
     def choose_action(self, state):
