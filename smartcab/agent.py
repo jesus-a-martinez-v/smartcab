@@ -95,7 +95,8 @@ class LearningAgent(Agent):
 
         if state not in self.Q:
             for action in self.valid_actions:
-                self.Q[state] =
+#                self.Q[state] =
+                pass
 
         return
 
@@ -106,7 +107,9 @@ class LearningAgent(Agent):
         # Set the agent state and default action
         self.state = state
         self.next_waypoint = self.planner.next_waypoint()
-        action = None
+
+        action_index = random.randint(0, 3)
+        action = self.valid_actions[action_index]
 
         ########### 
         ## TO DO ##
