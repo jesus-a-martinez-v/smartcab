@@ -39,7 +39,7 @@ class Simulator(object):
     def __init__(self, env, size=None, update_delay=2.0, display=True, log_metrics=False, optimized=False):
         self.env = env
         self.size = size if size is not None else (
-        (self.env.grid_size[0] + 1) * self.env.block_size, (self.env.grid_size[1] + 2) * self.env.block_size)
+            (self.env.grid_size[0] + 1) * self.env.block_size, (self.env.grid_size[1] + 2) * self.env.block_size)
         self.width, self.height = self.size
         self.road_width = 44
 
@@ -332,10 +332,11 @@ class Simulator(object):
         # Boundary
         self.pygame.draw.rect(self.screen, self.boundary, ((self.env.bounds[0] - self.env.hang) * self.env.block_size,
                                                            (self.env.bounds[1] - self.env.hang) * self.env.block_size, (
-                                                           self.env.bounds[
-                                                               2] + self.env.hang / 3) * self.env.block_size, (
-                                                           self.env.bounds[
-                                                               3] - 1 + self.env.hang / 3) * self.env.block_size), 4)
+                                                               self.env.bounds[
+                                                                   2] + self.env.hang / 3) * self.env.block_size, (
+                                                               self.env.bounds[
+                                                                   3] - 1 + self.env.hang / 3) * self.env.block_size),
+                              4)
 
         for road in self.env.roads:
             # Road
@@ -359,15 +360,15 @@ class Simulator(object):
                                                        intersection[0] * self.env.block_size + self.road_width,
                                                        intersection[1] * self.env.block_size + self.road_width / 2))
                 self.pygame.draw.line(self.screen, self.stop_color, (
-                intersection[0] * self.env.block_size - self.road_width / 2,
-                intersection[1] * self.env.block_size - self.road_width / 2), (
-                                      intersection[0] * self.env.block_size - self.road_width / 2,
-                                      intersection[1] * self.env.block_size + self.road_width / 2), 2)
+                    intersection[0] * self.env.block_size - self.road_width / 2,
+                    intersection[1] * self.env.block_size - self.road_width / 2), (
+                                          intersection[0] * self.env.block_size - self.road_width / 2,
+                                          intersection[1] * self.env.block_size + self.road_width / 2), 2)
                 self.pygame.draw.line(self.screen, self.stop_color, (
-                intersection[0] * self.env.block_size + self.road_width / 2 + 1,
-                intersection[1] * self.env.block_size - self.road_width / 2), (
-                                      intersection[0] * self.env.block_size + self.road_width / 2 + 1,
-                                      intersection[1] * self.env.block_size + self.road_width / 2), 2)
+                    intersection[0] * self.env.block_size + self.road_width / 2 + 1,
+                    intersection[1] * self.env.block_size - self.road_width / 2), (
+                                          intersection[0] * self.env.block_size + self.road_width / 2 + 1,
+                                          intersection[1] * self.env.block_size + self.road_width / 2), 2)
             else:
                 self.screen.blit(self._ew,
                                  self.pygame.rect.Rect(intersection[0] * self.env.block_size - self.road_width / 2,
@@ -375,23 +376,25 @@ class Simulator(object):
                                                        intersection[0] * self.env.block_size + self.road_width,
                                                        intersection[1] * self.env.block_size + self.road_width / 2))
                 self.pygame.draw.line(self.screen, self.stop_color, (
-                intersection[0] * self.env.block_size - self.road_width / 2,
-                intersection[1] * self.env.block_size - self.road_width / 2), (
-                                      intersection[0] * self.env.block_size + self.road_width / 2,
-                                      intersection[1] * self.env.block_size - self.road_width / 2), 2)
+                    intersection[0] * self.env.block_size - self.road_width / 2,
+                    intersection[1] * self.env.block_size - self.road_width / 2), (
+                                          intersection[0] * self.env.block_size + self.road_width / 2,
+                                          intersection[1] * self.env.block_size - self.road_width / 2), 2)
                 self.pygame.draw.line(self.screen, self.stop_color, (
-                intersection[0] * self.env.block_size + self.road_width / 2,
-                intersection[1] * self.env.block_size + self.road_width / 2 + 1), (
-                                      intersection[0] * self.env.block_size - self.road_width / 2,
-                                      intersection[1] * self.env.block_size + self.road_width / 2 + 1), 2)
+                    intersection[0] * self.env.block_size + self.road_width / 2,
+                    intersection[1] * self.env.block_size + self.road_width / 2 + 1), (
+                                          intersection[0] * self.env.block_size - self.road_width / 2,
+                                          intersection[1] * self.env.block_size + self.road_width / 2 + 1), 2)
 
                 # * Dynamic elements
         self.font = self.pygame.font.Font(None, 20)
         for agent, state in self.env.agent_states.iteritems():
             # Compute precise agent location here (back from the intersection some)
             agent_offset = (
-            2 * state['heading'][0] * self.agent_circle_radius + self.agent_circle_radius * state['heading'][1] * 0.5, \
-            2 * state['heading'][1] * self.agent_circle_radius - self.agent_circle_radius * state['heading'][0] * 0.5)
+                2 * state['heading'][0] * self.agent_circle_radius + self.agent_circle_radius * state['heading'][
+                    1] * 0.5, \
+                2 * state['heading'][1] * self.agent_circle_radius - self.agent_circle_radius * state['heading'][
+                    0] * 0.5)
 
             agent_pos = (state['location'][0] * self.env.block_size - agent_offset[0],
                          state['location'][1] * self.env.block_size - agent_offset[1])
@@ -510,13 +513,13 @@ class Simulator(object):
 
             # Denote whether a trial was a success or failure
             if (state['destination'] != state['location'] and state['deadline'] > 0) or (
-                    self.env.enforce_deadline is not True and state['destination'] != state['location']):
+                            self.env.enforce_deadline is not True and state['destination'] != state['location']):
                 self.font = self.pygame.font.Font(None, 40)
-                if self.env.success == True:
+                if self.env.success:
                     self.screen.blit(
                         self.font.render("Previous Trial: Success", True, self.colors['dgreen'], self.bg_color),
                         (10, 50))
-                if self.env.success == False:
+                if not self.env.success:
                     self.screen.blit(
                         self.font.render("Previous Trial: Failure", True, self.colors['maroon'], self.bg_color),
                         (10, 50))
