@@ -105,3 +105,4 @@ venv.bak/
 
 .idea/
 project_description.md
+logs/
