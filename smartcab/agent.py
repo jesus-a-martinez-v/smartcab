@@ -20,11 +20,7 @@ class LearningAgent(Agent):
         self.Q = dict()  # Create a Q-table which will be a dictionary of tuples
         self.epsilon = epsilon  # Random exploration factor
         self.alpha = alpha  # Learning factor
-
-        ###########
-        ## TO DO ##
-        ###########
-        # Set any additional class parameters as needed
+        
         self.trial = 1
 
     def reset(self, destination=None, testing=False):
@@ -35,9 +31,6 @@ class LearningAgent(Agent):
         # Select the destination as the new location to route to
         self.planner.route_to(destination)
 
-        ########### 
-        ## TO DO ##
-        ###########
         # Update epsilon using a decay function of your choice
         # Update additional class parameters as needed
         # If 'testing' is True, set epsilon and alpha to 0
@@ -60,10 +53,6 @@ class LearningAgent(Agent):
         waypoint = self.planner.next_waypoint()  # The next waypoint
         inputs = self.env.sense(self)  # Visual input - intersection light and traffic
         deadline = self.env.get_deadline(self)  # Remaining deadline
-
-        ########### 
-        ## TO DO ##
-        ###########
 
         # NOTE : you are not allowed to engineer features outside of the inputs available.
         # Because the aim of this project is to teach Reinforcement Learning, we have placed 
@@ -96,7 +85,6 @@ class LearningAgent(Agent):
                 self.Q[state] = dict()
                 for action in self.valid_actions:
                     self.Q[state][action] = 0.0
-        return
 
     def choose_action(self, state):
         """ The choose_action function is called when the agent is asked to choose
@@ -130,8 +118,6 @@ class LearningAgent(Agent):
         if self.learning:
             self.Q[state][action] += self.alpha * (reward - self.Q[state][action])
 
-        return
-
     def update(self):
         """ The update function is called when a time step is completed in the 
             environment for a given trial. This function will build the agent
@@ -142,8 +128,6 @@ class LearningAgent(Agent):
         action = self.choose_action(state)  # Choose an action
         reward = self.env.act(self, action)  # Receive a reward
         self.learn(state, action, reward)  # Q-learn
-
-        return
 
 
 def run():
